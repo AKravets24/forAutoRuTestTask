@@ -1,5 +1,5 @@
 import { bookApi } from '../api_connect/bookApi';
-import { Dispatch } from "redux";
+// import { Dispatch } from "redux";
 
 const BOOK_RECEIVED = 'BOOK_RECEIVED';
 
@@ -8,6 +8,8 @@ const actions = {
 };
 
 const getWantedBookAC = (bookName) => async (dispatch) =>  {
+  console.log(bookName)
+  debugger
   try {
     let response = await bookApi.getBooksList(bookName)
     if (response.status === 200) dispatch(actions.setMyBook(bookName))
@@ -16,11 +18,11 @@ const getWantedBookAC = (bookName) => async (dispatch) =>  {
   catch (err) { console.log(err) }
 }
 
-const dialogActions = {
+const bookFinderACsObj = {
     getWantedBookAC,
   };
 
-export const bookFinderACs = (state = dialogActions) => { return state };
+export const bookFinderACs = (state = bookFinderACsObj) => { return state };
 
 
 let initialBookFinderState = {

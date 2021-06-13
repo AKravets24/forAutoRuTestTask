@@ -7,4 +7,4 @@ import { bookFinderReducer, bookFinderACs} from './bookFinderReducer'
 let rootReducer = combineReducers({ bookFinderReducer, bookFinderACs });
 
 
-export let store = createStore(rootReducer).getState();
+export let store = createStore(rootReducer);
