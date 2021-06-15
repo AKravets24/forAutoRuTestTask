@@ -7,13 +7,14 @@ const actions = {
     setMyBook: (bookList) => ({ type: BOOK_RECEIVED, bookList}),
 };
 
-const getWantedBookAC = (bookName) => async (dispatch) =>  {
-  console.log(bookName)
-  debugger
+const getWantedBookAC = (text,searchType) => async (dispatch) =>  {
+  console.log(searchType)
+  let response = undefined;
   try {
-    let response = await bookApi.getBooksList(bookName)
-    if (response.status === 200) dispatch(actions.setMyBook(bookName))
-    console.log(response)
+    if        (searchType === 'Search by words') {response = await bookApi.getBooksListByWords (text)} 
+    else if   (searchType === 'Search by title') {response = await bookApi.getBooksListByTitle (text)} 
+    else if   (searchType === 'Search by author'){response = await bookApi.getBooksListByAuthor(text)}  
+    if (response.status === 200) dispatch(actions.setMyBook(response.data))
     }
   catch (err) { console.log(err) }
 }
@@ -26,13 +27,20 @@ export const bookFinderACs = (state = bookFinderACsObj) => { return state };
 
 
 let initialBookFinderState = {
-    bookList: [],
+  totalСoincidence: null,
+  numFoundExact: null,
+  bookList: [],
 }
 
 export const bookFinderReducer = (state = initialBookFinderState, action) => {
 
     switch (action.type) {
-        case BOOK_RECEIVED : return {...state, bookList: action.bookList}
+        case BOOK_RECEIVED : console.log(action); 
+        return {...state, 
+          totalСoincidence: action.bookList.numFound, 
+          numFoundExact: action.bookList.numFoundExact, 
+          bookList: action.bookList.docs,
+        }
 
         default: return {...state};
     }

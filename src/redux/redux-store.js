@@ -1,10 +1,7 @@
-import { createStore, combineReducers } from "redux";
-// import thunkMiddleWare from 'redux-thunk';
+import { createStore, combineReducers,applyMiddleware } from "redux";
+import thunkMiddleWare from 'redux-thunk';
 import { bookFinderReducer, bookFinderACs} from './bookFinderReducer'
-
-
 
 let rootReducer = combineReducers({ bookFinderReducer, bookFinderACs });
 
-
-export let store = createStore(rootReducer);
+export let store = createStore(rootReducer, applyMiddleware(thunkMiddleWare))
