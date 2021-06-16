@@ -18,6 +18,7 @@ function App ({state, actions}) {
 
 const mapStateToProps = (state) => {
   return {
+    bookListIsLoading: state.bookFinderReducer.bookListIsLoading,
     bookList: state.bookFinderReducer.bookList,
     totalСoincidence: state.bookFinderReducer.totalСoincidence,
     numFoundExact: state.bookFinderReducer.numFoundExact,
@@ -29,7 +30,7 @@ const mergeProps = (stateProps, dispatchProps) => {
   const state = stateProps;
   const { dispatch } = dispatchProps;
 
-  const getWantedBook = (bookName, searchType) => dispatch(state.bookFinderACs.getWantedBookAC(bookName, searchType));
+  const getWantedBook = (bookName, searchType, pageNum) => dispatch(state.bookFinderACs.getWantedBookAC(bookName, searchType, pageNum));
 
   const actions = { getWantedBook }
 

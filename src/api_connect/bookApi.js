@@ -7,9 +7,10 @@ const instance = axios.create({
 
 export const bookApi = {
   // getBooksList(bookName) { return axios.get(`http://openlibrary.org/search.json?title=${bookName}`) },
-  getBooksListByWords (words) { return instance.get (`search.json?q=${words}`)       },
-  getBooksListByTitle (title) { return instance.get (`search.json?title=${title}`)   },
-  getBooksListByAuthor(author){ return instance.get (`search.json?author=${author}`) },
+  // &page=2
+  getBooksListByWords (words, pageNum) { return instance.get (`search.json?q=${words}&page=${pageNum}`)       },
+  getBooksListByTitle (title, pageNum) { return instance.get (`search.json?title=${title}&page=${pageNum}`)   },
+  getBooksListByAuthor(author,pageNum) { return instance.get (`search.json?author=${author}&page=${pageNum}`) },
 } 
 
 
